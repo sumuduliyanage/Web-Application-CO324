@@ -9,7 +9,7 @@ import pprint
 def github_superstars(orgnanization: str) -> List[Tuple]:
 
 	with requests.Session() as session:
-		session.headers['Authorization'] = 'token ed77e01fbdcc9b54a596e7e366eba88c9cdc251f'#setting authorization
+		session.headers['Authorization'] = 'token edggtddvvgghhh'#setting authorization
 		url = "https://api.github.com/orgs/"+orgnanization+"/members"#getting the url
 		response = session.get(url)#takes the response for the request
 		jsonres = response.json()#getting json oject
@@ -59,7 +59,7 @@ def github_superstars(orgnanization: str) -> List[Tuple]:
 x = github_superstars("cepdnaclk")	
 winner_superstar_url = x[0]
 with requests.Session() as session:
-	session.headers['Authorization'] = 'token ed77e01fbdcc9b54a596e7e366eba88c9cdc251f'#setting authorization
+	session.headers['Authorization'] = 'token ed7hhhtvbhb'#setting authorization
 session.put(winner_superstar_url[0]+'/subscription')
 
 
