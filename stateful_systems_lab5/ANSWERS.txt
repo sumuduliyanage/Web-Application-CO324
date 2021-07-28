@@ -1,0 +1,10 @@
+E/16/200
+LAKMALI B. L. S
+____________________________________________________________________________
+
+2.
+ e. Can a task ever make an illegal transition due to a race condition during update? Explain why (not.)
+
+Yes, when a legal state transaction is happening in the meantime other clients can also ask for state transactions because there is no mutual exclusion so that transaction also being operated. So, the state will be changed and one of the transaction can be illegal.
+Suppose 2 clients access same task which is in OPEN state.Then client1 is transfering the state of the task to ASSIGNED while client2 is transfering it into CANCELLED.
+If client 2 access the task before client 1 transfering due to race condition, there will be an illegal transaction will happen.

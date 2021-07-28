@@ -1,0 +1,10 @@
+Sumudu,Liyanage,CO224,CO223,CO225,CO222
+Dilini,Gamage,EE285,CO252
+Isurika,Adhikari,CO202,CO323
+Akalanka,Perera,CO234,CO324
+Viraj,Dhanushka,EM215,EE286
+Hans,Thisanke,GP106,CE234,CO142
+Chethya,Abeywickrama,CO224,CO524
+Udari,Perera,CE215,ME215
+Esela,Vithanage,EE123,CO324
+Adithya,Liyanage,CO234

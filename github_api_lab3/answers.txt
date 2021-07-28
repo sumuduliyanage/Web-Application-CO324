@@ -1,0 +1,68 @@
+E/16/200
+Lakmali B.L.S
+__________________________________________________________________________________________________
+
+1.
+(a).If we print the response,
+    it gives the endpoints of API.
+    (Run ex1a.py to see the output)
+
+(b).This is implemented in ex1b.py file.
+
+(c).X-Ratelimit headers are custom headers. They are not included in the HTTP spec.
+    X-GitHub-Media-Type has a value of GitHub v3 and this lets us know the media type 
+    for the response. And other two important X-Ratelimit headers are X-RateLimit-Limit
+    and X-RateLimit-Remaining headers.This pair of headers 
+    indicate how many requests a client can make in a rolling time period (typically an hour) 
+    and how many of those requests the client has already spent.It can be briefly described like
+    below.
+    X-RateLimit-Limit - The maximum no of requests permitted for an hour
+    X-RateLimit-Remaining  - The number of requests remaining in the current rate limit window
+    X-RateLimit-Reset - The time at which the current rate limit window resets in unix time
+
+(d).with requests.Session() as session:
+     session.headers['Authorization'] = 'token YOUR_PAT_STRING'
+
+    In the above code, authorization credentials are sent to header 
+    using a token.
+    requests.get() creates a new Session object for each request made.
+    By creating a session object up front,we get to reuse the session 
+    again by again. And this also lets up persist cookies.for example, 
+    this lets us re-use settings to be used for all connections such as
+    headers and query parameters.  After making a connection to a 
+    server using a Session, that connection is 
+    kept around in a connection pool. When connecing to that server again it uses 
+    old connection and without establishing new connections.
+     
+
+(e).This is implemented in ex1e.py file.
+
+
+2.
+(a).This is implemented in ex2a.py file.
+
+(b).This is implemented in ex2b.py file.
+
+(c).We can use accept header for that.
+    *To select the v4(GraphQL),we can do it like below.
+      with requests.Session() as session:
+        session.headers['Accept'] = 'application/vnd.github.v4+json'
+    *To select the v3(REST API),we can do it like below.
+      with requests.Session() as session:
+        session.headers['Accept'] = 'application/vnd.github.v3+json'
+
+(d).In GraphQL(v4),the clients have the ability to dictate exactly what they need from server and
+    recieve that data in a predictable way. In Rest API(v3), entire particular object is in the
+    response and it leads to overfetching and can result in performance issues.
+    And using GraphQl, we can retrieve many resources in a single request.
+    The big problem in GraphQL is it always returns status code of 200, regardless of whether
+    that query was successful or not.And the other weakpoint of GraphQL is, it is lack of built in
+    caching support.Because REST APIs have multiple endpoints, they can
+    everage native HTTP caching to avoid refetching resources. With GraphQL, we
+    will need to setup your own caching support.
+    If we consider "what is better version?", it can be described like below.
+    If we deal with data that is relatively consistent over time, it is better to use
+    REST API. If we deal with rapidly changing data, it is better to use GrapgSQL.
+    GraphQL provides an interesting solution to common hurdles faced when using REST APIs.
+    
+    

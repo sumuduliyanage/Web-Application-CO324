@@ -1,0 +1,10 @@
+E/16/200
+Lakmali B .L .S
+______________________________________________________________________________________________________________
+
+3.
+b. no, we cannot.
+Because,list is are not immutable. The elemets of a list can be changed after the list is created.
+here, we can use tuples, because the tuples are immutable.
+Note that since tuples are immutable, 
+they do not run into the troubles of lists - they can be hashed by their contents without worries about modification.

@@ -1,0 +1,135 @@
+E/16/200
+LAKMALI B. L. S
+
+
+PART A
+______________________________________________________________________________________________
+
+1. Image
+    Docker image is a read-only template that contains a set of instructions for creating a container that can run on a docker platform. Docker image provides a convinient way to package up 
+    applications and preconfigured server environments, which we can use for our own private use or share publicly with other Docker users. So,images can exist without containers, whereas a 
+    container needs to run an image to exist. It is an immutable file that contains the source code, libraries, dependencies, tools, and other files needed for an application to run.Docker 
+    image is comprised of multiple layers. When a docker user runs an image, it can become one or multiple instances of that container.
+    These docker images are occasionally called as snapshots due to their read-only quality. 
+
+   Container
+    A Docker container is an open source software development platform. Its main benefit is to package applications in containers,allowing them to be portable to any system running a Linux 
+    or Windows operating system (OS). It is a virtualized run-time environment where users can isolate applications from the underlying system. These containers are portable and compact units
+    where an user is able to start up an application easily and fast.Since containers are autonomous, they provide strong isolation. Therefore, they ensures that they do not
+    interrupt other running containers, as well as the server that supports them. 
+
+2. Done by running following command
+   docker image pull nginx
+
+3. Docker tags convey useful information about a specific image version/variant. They are aliases to the ID of your image which often look like this: f1477ec11d12 . It's just  a way of referring
+   to your image. It ensures that users who pulls down your images knows precisely what they obtain. This helps users to differentiate between the different available images in a repository. These
+   tags convey useful information about a specific image version/variant. Whenever an image is tagged without an explicit tag, it’s given the 'latest' tag by default.
+
+4. Docker image is downloaded from docker hub.
+   They are stored inside the docker directory: /var/lib/docker/ after downloading.
+
+5. Done by running following command
+   docker container run -p 8080:80 -d nginx
+
+6. sumudu@sumudu-Aspire-A515-54G:~/Documents/co324_lab/optional/docker2/labs/app1$ sudo docker container run -p 8080:80 -d nginx
+   2b10d41cf60021ee77ae4c0a6ba99b96253afdc7872aef3672bbd586d3b9ef6f
+
+   This "2b10d41cf60021ee77ae4c0a6ba99b96253afdc7872aef3672bbd586d3b9ef6f" is the longer version of container id.
+
+7. This binds port 8080 of the container to TCP port 80 on 127.0.0.1 of the host machine. It publishes a container's port or ports to the docker host. It allows users to map a container's port
+   or a range of ports to the host explicitly, instead of exposing all the docker ports. -p is short for -publish.
+
+8. container name : stupefied_bhabha
+
+9. docker container stop stupefied_bhabha
+
+10. 
+  without -a 
+  sumudu@sumudu-Aspire-A515-54G:~/Documents/co324_lab/optional/docker2/labs/app1$ sudo docker container ps
+  CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                  NAMES
+  2b10d41cf600        nginx               "/docker-entrypoint.…"   11 minutes ago      Up 11 minutes       0.0.0.0:8080->80/tcp   stupefied_bhabha
+
+
+  with -a 
+  sumudu@sumudu-Aspire-A515-54G:~/Documents/co324_lab/optional/docker2/labs/app1$ sudo docker container ps -a
+  CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                    PORTS                  NAMES
+  2b10d41cf600        nginx               "/docker-entrypoint.…"   11 minutes ago      Up 11 minutes             0.0.0.0:8080->80/tcp   stupefied_bhabha
+  00903f91c702        nginx               "/docker-entrypoint.…"   18 hours ago        Created                                          busy_hopper
+  338971894fb8        nginx               "/docker-entrypoint.…"   18 hours ago        Created                                          bold_faraday
+  8291a661ff0f        nginx               "/docker-entrypoint.…"   18 hours ago        Exited (0) 11 hours ago                          admiring_mccarthy
+  6b9175f45e18        hello-world         "/hello"                 2 days ago          Exited (0) 2 days ago                            dreamy_proskuriakova
+
+  When the command 'docker ps' is executed, it  shows the information only about running containers.But when the command 'docker ps -a' is executed, it shows all the containers(Ex-:running,exited).
+
+
+11. docker logs <container_id>   
+
+12. docker container restart <container_name>
+
+13. docker image rmi <image_id>
+    ex: docker image rmi nginx
+
+14. To find currently running containers
+    sumudu@sumudu-Aspire-A515-54G:~/Documents/co324_lab/optional/docker2/labs/app1$ sudo docker container ps 
+    CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                  NAMES
+    2b10d41cf600        nginx               "/docker-entrypoint.…"   25 minutes ago      Up 25 minutes       0.0.0.0:8080->80/tcp   stupefied_bhabha
+
+    If we try to remove that running container, it generates the error message
+    "Error response from daemon: conflict: unable to remove repository reference "nginx" (must force) - container 00903f91c702 is using its referenced image ae2feff98a0c"
+
+    sumudu@sumudu-Aspire-A515-54G:~/Documents/co324_lab/optional/docker2/labs/app1$ sudo docker image  rmi nginx
+    Error response from daemon: conflict: unable to remove repository reference "nginx" (must force) - container 00903f91c702 is using its referenced image ae2feff98a0c
+
+
+
+
+PART B
+_____________________________________________________________________________________________
+
+1. Done
+   To build the image
+   sudo docker build -t e16200/app1 .
+
+
+2. Implemented Dockerfile in app2
+
+3. To Build the image
+     docker build -t e16200/app2 .
+
+   To Set message and colour
+   sumudu@sumudu-Aspire-A515-54G:~/Documents/co324_lab/optional/docker2/labs/app2$ sudo docker container run -p 3000:3000 --name labop -e message="hello" -e colour="white" e16200/app2
+   Server listening on port 3000
+
+4. Done
+
+5. Done
+
+6. cannot access the file uploaded in the previos container because now that container is removed and when removing a container 
+   it removes all the files corresponding to that container so that the file uploaded is deleted too. now in the uploaded folder is
+   newly created for the new container and there is no any file in it now.
+
+7. To Create volume 
+     sudo docker create volume <volume_name>
+       Ex-: sudo docker volume create app4volume
+
+   To Start container with volume
+     sudo docker container run -p 3000:3000 --name <container_name> -v <Volume_name>:/upload <image>
+       Ex-:sudo docker container run -p 3000:3000 --name LabApp -v app4volume:/upload e16200/app4
+
+
+8. To Login docker
+   sudo docker login 
+     -Give usename and password
+
+   To Push to repository
+      sudo docker push <image>
+
+       Ex-:sudo docker push e16200/app4
+
+   URL
+    https://hub.docker.com/repository/docker/e16200/app4
+
+
+
+
+

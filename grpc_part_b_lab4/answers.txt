@@ -1,0 +1,70 @@
+E/16/200
+Lakmali B.L.S
+
+PART B
+
+1. addTask function
+   It is not idempotent. Because if we add same Task again and again, those Tasks will
+   be added to the server each time by generating different ids.
+   
+   delTask function
+   It is idempotent. Because if we delete a task for particular id and if we try to delete
+   that Task with the same id, server will not change. No tasks will be removed after we
+   deleted once.
+
+   listTasks function
+   It is idempotent. It does not change when we ask for the same data. Server is not going to
+   change when we query data from it.
+
+   editTask function
+   It is idempotent. If we edit with same data to same id everytime, server will not change.
+
+2. Implemented in the python files.
+
+3. Task descriptions must be less than MAXLEN=1024 characters.
+   if user given string for description is too large, then the server will be down.
+   If we do not consider about the character length of the description, someone can easily
+   do Denial of Service (DoS) attack by giving a considerable large input.
+
+   Task IDs must be valid.
+   In functions like delTask and editTask should have a valid task to do the task. User
+   can give a wrong key to delete an item. So, we should check the id before deleting.
+
+4. Implemented in the python files.
+
+5. Implemented in the python files.
+
+6. When two clients works simultaneously on editTask function, lost update problem can occur.
+   A lost update occurs when two different transactions are trying to update the same
+   task at the same time. Then update done
+   by one person will be lost.
+
+   Solution is to do thread synchronization. Then next thread will start when the current 
+   running thread is over. It is a good solution for this problem. To reduce the writing
+   conflicts, we can create a distributed system as well.
+
+7. Data race occurs when two or more threads in a single process access the same memory 
+   location concurrently. By synchronizing the threads we can solve this problem. We 
+   can use a channel or a lock to achieve synchronization.
+
+8. Here, Lock() function is called inside the addTask function. For each function call
+   there will be  a seperate lock. So, every user can access the function at same time.
+   Because, eachone gets a seperate lock to enter to the function.
+   So no thread synchronization is happening here. Function calls are not synchronised.
+   They work seperately.
+   So, data racing problem is still there. If we can have 
+   one lock and if we can control that lock, we can prevent
+   data racing. That correct method is implemented in question 9. 
+
+9. Implemented in the python files.
+
+10. Yes
+    When listTask function is called at the same time addTask function is called.
+    These two threads should run seperately.
+    Then listTask function should be in a critical section. 
+
+
+
+
+
+

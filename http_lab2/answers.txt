@@ -1,0 +1,87 @@
+E/16/200
+Sumudu Liyanage
+Answers
+______________________________________________________________________________________________
+1)
+  (a).code : response_code = response.getcode()
+	     print (response.getcode())
+
+      Answer for Response Code = 200
+
+  (b).code : response_headers = response.headers.items()
+             print (response_headers)
+	
+      Answer: 'Server', 'Apache/2.4.35 (FreeBSD) OpenSSL/1.0.1s-freebsd PHP/5.6.38'),
+            ('X-Powered-By', 'PHP/5.6.38')
+
+     Web Server : Apache/2.4.35 (FreeBSD) OpenSSL/1.0.1s-freebsd PHP/5.6.38
+     OS         : FreeBSD
+
+  (c).code: response_body_size = len(body)
+      print ("Response Body Size: ",response_body_size)
+
+      Answer for response body size = 54123 (in bytes)
+
+  (d).code: print (type(body))
+
+      Answer = bytes
+  
+  (e). The variable 'body' is byte type. 
+       Because, http resposes can be as videos, images, streaming, sound,text,etc.
+       So, when the body data is byte type, they can be converted into any type.
+
+  (f). For url - “http://eng.pdn.ac.lk/unknown" 
+       Error   - urllib.error.HTTPError: HTTP Error 404: Not Found
+       Error 404 is occuring when the host is available but requested data is not available.
+       The requested resource could not be found but may be available in the future.
+       Subsequent requests by the client are permissible.
+
+       For url - “http://unknown.pdn.ac.lk"
+       Error   - urllib.error.URLError: <urlopen error [Errno 11001] getaddrinfo failed>
+       This error will occur if you do not have a valid url specified in the WebPageUrl etc 
+       function.
+
+   (g). code : response_1 = request.urlopen("https://ta.wikipedia.org/wiki/%E0%AE%9A%E0%AE%BF%E0%AE%99%E0%AF%8D%E0%AE%95%E0%AE%B3%E0%AE%AE%E0%AF%8D")
+
+	       # print body_1-part g
+	       body_1 = response_1.read()
+               print("part g")
+               print (body_1)
+               
+   (h). code : body_2 = body_1.decode('utf-8')
+	       print ("part h")
+               print (body_2)
+
+      In part g, body_1 data type was in bytes. But after decoding in part h, the data type of part 2 is 
+      string.
+               
+
+
+2)
+  (i).With  “&format=json&pretty=1” , data is parsed in json format.
+
+  (j).implemented in python file
+
+  (k).URL Encoding converts reserved, unsafe, and non-ASCII characters in URLs to a format
+      that is universally accepted and understood by all web browsers and servers.As all the
+      special characters are encoded,it will not cause unexpected results.Decoding is useful
+      for decoding the URL to get the string representation of the URL before it was encoded.
+
+  (l).implementation is done in the python file
+
+
+3)  
+  (a).implementation is in the python file
+  (b).implementation is in the python file
+  (c).We can make HEAD request to a web page and return the HTTP headers,then we don't need to download the body
+      Example:
+	import requests
+	x = requests.head("http://eng.pdn.ac.lk")
+	print(x.headers)
+
+
+
+
+
+
+

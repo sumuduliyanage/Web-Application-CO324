@@ -1,0 +1,105 @@
+ANSWERS
+
+EXERCISE 1
+
+a.The with statement creates a context manager and it will automatically close
+ the file handler when are have finished the file handling process. So, we don't wont
+ to use "file.close()" ,when we are using "with" keyword.The code becomes more clear
+ and readable as well.
+
+b.tuple	
+
+
+EXERCISE 2
+
+c.The zip() function returns a zip object, which is an iterator of tuples 
+ where the first item in each passed iterator 
+ is paired together,and then the second item in each passed iterator are paired together etc.
+
+code:
+	filename = "userdata.txt"
+	ids, logins = load_users_to_list(filename)
+	#question c- we get a zip object
+	#those lists are zipped and created a zip object called combined
+	combined = zip(ids,logins)
+	print (combined)#printing the zip object
+	print(tuple(combined))#printing all the tuples in zip object
+
+output:
+	<zip object at 0x0000027F7730CD40>
+	(('1020', 'Sumudu'), ('1021', 'Isurika'), ('1022', 'Wasana'), 
+	('1023', 'Damsi'), ('1024', 'Viraj'), 
+	('1025', 'Hans'), ('1026', 'Thevin'), ('1027', 'Vinuri'),
+	('1028', 'Sithika'), ('1029', 'Dilini'), ('1030', 'Ruby'),
+	('1031', 'Nesandi'), ('1032', 'Minuri'))
+
+I also implemented above code in ex2.py file.
+
+d.We get different zip object, which is also an iterator of tuples but the tuple values are interchanged.
+
+code:
+	combined_reversed = zip(logins,ids)
+	print (combined_reversed)
+	print (tuple(combined_reversed))#the tuple values are interchanged
+
+output:
+	<zip object at 0x0000027F76A3E940>
+	(('Sumudu', '1020'), ('Isurika', '1021'), ('Wasana', '1022'),
+ 	('Damsi', '1023'), ('Viraj', '1024'),
+ 	('Hans', '1025'), ('Thevin', '1026'),('Vinuri', '1027'),
+ 	('Sithika', '1028'), ('Dilini', '1029'), ('Ruby', '1030'), 
+	('Nesandi', '1031'), ('Minuri', '1032'))
+
+EXERCISE 3
+e.Using below code
+	h_table = load_users_to_dict(filename)
+	print (h_table.get("given_id"))
+
+f.Using below code
+ code:
+	def load_users_to_dict_opposite(filename):
+   	 #initializing the dictionary
+    	 users = dict()
+  	  #file object f
+  	  with open(filename) as f:
+      	  #each line of the file is read
+        	for line in f:
+            	id, login = line.split()
+            	#they are added to the hash table
+            	users[login ]= id
+
+   	 #that dictionary is returned
+    	return users
+
+	filename = "userdata.txt"
+	print (load_users_to_dict_opposite(filename))
+
+output:
+	{'Sumudu': '1020', 'Isurika': '1021', 'Wasana': '1022', 'Damsi': '1023', 
+	'Viraj': '1024', 'Hans': '1025', 'Thevin': '1026', 'Vinuri': '1027',
+	'Sithika': '1028', 'Dilini': '1029', 'Ruby': '1030', 'Nesandi': '1031', 'Minuri': '1032'}
+
+g.
+code:
+	def load_users_to_dict_comma(filename):
+
+    	 users = dict()
+
+    	 with open(filename) as f:
+
+        	for line in f:
+            	 #split by comma
+            	 id, login = line.strip().split(",")
+           	 users.update({id : login})
+
+          	  # add details to the users dict
+   	 return users
+
+	filename = "userdata_comma.txt"
+	print (load_users_to_dict_comma(filename))
+output:
+	{'1020': 'Sumudu', '1021': 'Isurika', '1022': 'Wasana', '1023': 'Damsi',
+ 	'1024': 'Viraj', '1025': 'Hans', '1026': 'Thevin',
+ 	'1027': 'Vinuri', '1028': 'Sithika', '1029': 'Dilini', '1030': 'Ruby', 
+	'1031': 'Nesandi', '1032': 'Minuri'}
+
